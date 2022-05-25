@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext.js";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { ItemCard } from "../component/ItemCard";
+import { Link } from "react-router-dom";
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+export const Home = () => {
+  const { store, actions } = useContext(Context);
+  return (
+    <div className="container">
+      <h1> character</h1>
+      <div className="d-flex flex-row flex-nowrap overflow-auto">
+        {store.peoples.map((people, index) => {
+          return <ItemCard key={people.uid} item={people} />;
+        })}
+      </div>
+    </div>
+  );
+};
